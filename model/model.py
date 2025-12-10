@@ -63,6 +63,15 @@ class Model:
         :return maggiori: archi con peso > soglia
         """
         # TODO
+        min = 0
+        for (u,v,w) in self.G.edges.data():
+            if w < soglia:
+                min +=1
+        max = 0
+        for (u,v,w) in self.G.edges.data():
+            if w > soglia:
+                max +=1
+        return min,max
 
     """Implementare la parte di ricerca del cammino minimo"""
     # TODO
