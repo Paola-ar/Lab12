@@ -16,4 +16,4 @@ class Connessione:
         return f"{self.id}, {self.id_rifugio1}, {self.id_rifugio2},{self.distanza},  {self.difficolta}"
 
     def __hash__(self):
-        return f"{self.id}, {self.id_rifugio1}, {self.id_rifugio2}, {self.distanza}, {self.difficolta}"
+        return ((self.id,self.id_rifugio1, self.id_rifugio2, self.distanza, self.difficolta))

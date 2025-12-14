@@ -48,4 +48,33 @@ class Controller:
 
     """Implementare la parte di ricerca del cammino minimo"""
     # TODO
+    def handle_cammino_minimo(self, e):
+        try:
+            soglia = float(self._view.txt_soglia.value)
+        except:
+            self._view.show_alert("Inserisci un numero valido per la soglia")
+            return
+
+        #path = self._model.cammino_minimo(soglia)
+        path = self._model.cammino_minimo_ricorsivo(soglia)
+        self._view.lista_visualizzazione_3.controls.clear()
+
+        if not path:
+            self._view.lista_visualizzazione_3.controls.append(ft.Text("Cammino minimo non valido!"))
+
+        else:
+            self._view.lista_visualizzazione_3.controls.append(ft.Text(f"Cammino minimo: "))
+            for i in range(len(path)-1):
+                u_id = path[i]
+                v_id = path[i+1]
+                u = self._model.id_map[u_id]
+                v = self._model.id_map[v_id]
+                peso = self._model.G[u_id][v_id]["weight"]
+
+                testo = (f"[{u.id}] {u.nome} ({u.localita}) --> [{v.id}] {v.nome} ({v.localita}) [peso: {peso:.1f}]")
+                self._view.lista_visualizzazione_3.controls.append(ft.Text(testo))
+
+        self._view.page.update()
+
+
 
